@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["enricocarlesso@gmail.com"]
   gem.description   = "A simple gem to be used in combination with https://github.com/carlesso/RubyGeoIp"
   gem.summary       = "Client for RubyGeoIp Project"
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/carlesso/geo_ip_client"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
