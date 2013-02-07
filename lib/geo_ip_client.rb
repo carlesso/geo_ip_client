@@ -1,4 +1,5 @@
 require "geo_ip_client/version"
+require "geo_ip_client/regions"
 require "open-uri"
 require "json"
 
@@ -20,7 +21,14 @@ module GeoIpClient
         req = open("#{server_path}/?auth=#{secret_key}&q=#{ip}")
       end
       if req.status[0].to_s == "200"
-        return JSON.parse req.read
+        j = JSON.parse(req.read)
+        begin
+          region_code = "#{ j["country_code2"] }-#{ j["region_name"] }"
+          j["region_long_name"] = GeoIpClient::REGIONS[region_code]
+          return j
+        rescue
+          return j
+        end
       else
         raise JSON.parse(req.read)["error"]
       end
